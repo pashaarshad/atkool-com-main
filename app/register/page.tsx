@@ -36,6 +36,8 @@ export default function RegisterPage() {
 
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -46,17 +48,50 @@ export default function RegisterPage() {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+    setErrorMsg("");
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      setErrorMsg("Passwords do not match!");
       return;
     }
-    // In production, this would call the API
-    console.log("Registration Data:", formData);
-    setSubmitted(true);
+
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          schoolName: formData.schoolName,
+          boardType: formData.boardType,
+          city: formData.city,
+          state: formData.state,
+          studentCount: formData.studentCount,
+          adminName: formData.adminName,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data.message || "Registration failed. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const nextStep = () => setStep(2);
@@ -648,6 +683,23 @@ export default function RegisterPage() {
                     </span>
                   </label>
 
+                  {/* Error Message */}
+                  {errorMsg && (
+                    <div
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius: "var(--radius-md)",
+                        background: "rgba(239, 68, 68, 0.1)",
+                        border: "1px solid rgba(239, 68, 68, 0.3)",
+                        color: "#FCA5A5",
+                        fontSize: "0.9rem",
+                        fontWeight: 500,
+                      }}
+                    >
+                      ⚠️ {errorMsg}
+                    </div>
+                  )}
+
                   {/* Buttons */}
                   <div
                     style={{
@@ -662,15 +714,22 @@ export default function RegisterPage() {
                       className="btn-secondary"
                       onClick={prevStep}
                       style={{ padding: "16px 24px" }}
+                      disabled={loading}
                     >
                       ← Back
                     </button>
                     <button
                       type="submit"
                       className="btn-gold"
-                      style={{ padding: "16px", fontSize: "1rem" }}
+                      style={{
+                        padding: "16px",
+                        fontSize: "1rem",
+                        opacity: loading ? 0.7 : 1,
+                        cursor: loading ? "wait" : "pointer",
+                      }}
+                      disabled={loading}
                     >
-                      🚀 Register School
+                      {loading ? "⏳ Submitting..." : "🚀 Register School"}
                     </button>
                   </div>
                 </motion.div>
