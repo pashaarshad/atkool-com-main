@@ -1,0 +1,37 @@
+name: Deploy to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            # 1. Navigate to the project directory
+            cd /var/www/atkool-com-main
+            
+            # 2. Pull the latest code from GitHub
+            git pull origin master
+            
+            # 3. Install dependencies
+            npm install
+            
+            # 4. Build the Next.js application
+            npm run build
+            
+            # 5. Restart the PM2 process to apply changes
+            pm2 restart atkool-main
