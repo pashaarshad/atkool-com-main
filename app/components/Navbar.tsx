@@ -91,14 +91,11 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA Buttons */}
+        {/* Contact Info */}
         <div className="hidden md:flex items-center gap-3">
-          <a href="#contact" className="btn-secondary" style={{ padding: "10px 22px", fontSize: "0.9rem" }}>
-            Login
+          <a href="tel:+919876543210" className="btn-primary" style={{ padding: "10px 22px", fontSize: "0.9rem" }}>
+            📞 +91 98765 43210
           </a>
-          <Link href="/register" className="btn-primary" style={{ padding: "10px 22px", fontSize: "0.9rem" }}>
-            Register School
-          </Link>
         </div>
 
         {/* Mobile Burger */}
@@ -192,17 +189,14 @@ export default function Navbar() {
                   marginTop: 16,
                 }}
               >
-                <a href="#contact" className="btn-secondary" style={{ justifyContent: "center" }}>
-                  Login
-                </a>
-                <Link
-                  href="/register"
+                <a
+                  href="tel:+919876543210"
                   className="btn-primary"
                   style={{ justifyContent: "center" }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  Register School
-                </Link>
+                  📞 +91 98765 43210
+                </a>
               </div>
             </div>
           </motion.div>

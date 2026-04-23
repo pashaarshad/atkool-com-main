@@ -89,8 +89,8 @@ export default function HeroSection() {
           </p>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <Link href="/register" className="btn-primary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>
-              Register Your School
+            <a href="tel:+919876543210" className="btn-primary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>
+              Contact Us
               <svg
                 width="20"
                 height="20"
@@ -104,7 +104,7 @@ export default function HeroSection() {
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
-            </Link>
+            </a>
             <a href="#features" className="btn-secondary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>
               Explore Features
             </a>

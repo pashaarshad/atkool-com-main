@@ -5,8 +5,8 @@ This document is the definitive source of truth for the **ATKool Main Website** 
 ---
 
 ## 🏗️ 1. Project Overview
-- **Product:** ATKool Main Website — Landing page + School Registration portal.
-- **Purpose:** Public website at `atkool.com` — the entry point for new schools to discover and register for the ATKool platform.
+- **Product:** ATKool Main Website — Landing page.
+- **Purpose:** Public website at `atkool.com` — the entry point for new schools to discover and contact the ATKool platform.
 - **Framework:** Next.js 16 (App Router) with TypeScript.
 - **Styling:** Tailwind CSS v4 + Custom CSS Design System.
 - **3D Effects:** Three.js (via @react-three/fiber + @react-three/drei).
@@ -20,7 +20,7 @@ This document is the definitive source of truth for the **ATKool Main Website** 
 ### **Domain Strategy**
 | Domain | App | Description |
 |--------|-----|-------------|
-| `atkool.com` | **atkool-com-main** (this project) | Landing page + Registration |
+| `atkool.com` | **atkool-com-main** (this project) | Landing page + Contact Form |
 | `admin.atkool.com` (TBD) | atkool-website | Super Admin + School Admin dashboards |
 | Mobile App | atkool-fultter-app | Parent + Student + Teacher (Flutter) |
 

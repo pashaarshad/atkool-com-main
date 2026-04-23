@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 const steps = [
   {
     step: "01",
-    title: "Register Your School",
+    title: "Contact Our Team",
     description:
-      "Sign up in minutes. Provide your school details, set up admin credentials, and configure your institution's profile.",
+      "Get in touch with us. We will quickly set up your school details, admin credentials, and configure your institution's profile.",
     icon: "🏫",
     color: "#3B82F6",
   },
